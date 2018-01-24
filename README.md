@@ -25,24 +25,12 @@
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework **TypeScript** starter repository. 
-  
-## Installation
-
-```bash
-$ npm install
-```
-
-## Start
-
-```
-$ npm run start
-```
 
 ## People
 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
-
+  
 ---
 
 <p align="center">
@@ -50,6 +38,15 @@ $ npm run start
 <img alt="Preact" title="Preact" src="https://cdn.rawgit.com/developit/b4416d5c92b743dbaec1e68bc4c27cda/raw/3235dc508f7eb834ebf48418aea212a05df13db1/preact-logo-trans.svg" width="550">
 </a>
 </p>
+
+[![npm](https://img.shields.io/npm/v/preact.svg)](http://npm.im/preact)
+[![CDNJS](https://img.shields.io/cdnjs/v/preact.svg)](https://cdnjs.com/libraries/preact)
+[![Preact Slack Community](https://preact-slack.now.sh/badge.svg)](https://preact-slack.now.sh)
+[![OpenCollective Backers](https://opencollective.com/preact/backers/badge.svg)](#backers)
+[![OpenCollective Sponsors](https://opencollective.com/preact/sponsors/badge.svg)](#sponsors)
+[![travis](https://travis-ci.org/developit/preact.svg?branch=master)](https://travis-ci.org/developit/preact)
+[![coveralls](https://img.shields.io/coveralls/developit/preact/master.svg)](https://coveralls.io/github/developit/preact)
+[![gzip size](http://img.badgesize.io/https://unpkg.com/preact/dist/preact.min.js?compression=gzip)](https://unpkg.com/preact/dist/preact.min.js)
 <p align="center">Fast <b>3kB</b> alternative to React with the same modern API.</p>
 
 **All the power of Virtual DOM components, without the overhead:**
@@ -63,40 +60,16 @@ $ npm run start
 
 ### 💁 More information at the [Preact Website ➞](https://preactjs.com)
 
-
 ---
 
-<!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+## Installation
 
-- [Demos](#demos)
-- [Libraries & Add-ons](#libraries--add-ons)
-- [Getting Started](#getting-started)
-	- [Import what you need](#import-what-you-need)
-	- [Rendering JSX](#rendering-jsx)
-	- [Components](#components)
-	- [Props & State](#props--state)
-- [Linked State](#linked-state)
-- [Examples](#examples)
-- [Extensions](#extensions)
-- [Debug Mode](#debug-mode)
-- [Backers](#backers)
-- [Sponsors](#sponsors)
-- [License](#license)
+```bash
+$ yarn
+```
 
-<!-- /TOC -->
+## Start
 
-
-# Preact
-
-[![npm](https://img.shields.io/npm/v/preact.svg)](http://npm.im/preact)
-[![CDNJS](https://img.shields.io/cdnjs/v/preact.svg)](https://cdnjs.com/libraries/preact)
-[![Preact Slack Community](https://preact-slack.now.sh/badge.svg)](https://preact-slack.now.sh)
-[![OpenCollective Backers](https://opencollective.com/preact/backers/badge.svg)](#backers)
-[![OpenCollective Sponsors](https://opencollective.com/preact/sponsors/badge.svg)](#sponsors)
-[![travis](https://travis-ci.org/developit/preact.svg?branch=master)](https://travis-ci.org/developit/preact)
-[![coveralls](https://img.shields.io/coveralls/developit/preact/master.svg)](https://coveralls.io/github/developit/preact)
-[![gzip size](http://img.badgesize.io/https://unpkg.com/preact/dist/preact.min.js?compression=gzip)](https://unpkg.com/preact/dist/preact.min.js)
-
-Preact supports modern browsers and IE9+:
-
-[![Browsers](https://saucelabs.com/browser-matrix/preact.svg)](https://saucelabs.com/u/preact)
+```
+$ yarn start
+```
