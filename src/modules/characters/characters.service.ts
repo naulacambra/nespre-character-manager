@@ -1,43 +1,31 @@
-import { Component } from '@nestjs/common';
+import { Component, Inject } from '@nestjs/common';
 import { Character } from './interfaces/character.interface';
 import { CreateCharacterDto } from './dto/create-character.dto';
+import { UpdateCharacterDto } from './dto/update-character.dto';
+import { Model } from 'mongoose';
 
 @Component()
 export class CharactersService {
-  private id: number = 1;
-  private readonly characters: Character[] = [];
+	constructor(@Inject('CharacterModelToken') private readonly characterModel: Model<Character> ) {}
 
-  create(character: CreateCharacterDto) {
-	  console.log(character);
-	  character.id = this.id;
-	  this.characters.push(character);
-	  ++this.id;
-  }
+	async create(createCharacterDto: CreateCharacterDto): Promise<Character> {
+		const createdCharacter = new this.characterModel(createCharacterDto);
+		return await createdCharacter.save();
+	}
 
-  findAll(): Character[] {
-    return this.characters;
-  }
+	async findAll(): Promise<Character[]> {
+		return await this.characterModel.find().exec();
+	}
 
-  findById(id: number): Character {
-  	for (var i = this.characters.length - 1; i >= 0; i--) {
-  		if (this.characters[i].id == id) return this.characters[i];
-  	}
-  	return null;
-  }
+	async findById(id: number): Promise<Character> {
+		return await this.characterModel.findById( id ).exec();
+	}
 
-  delete(id: number) {
-  	for (var i = this.characters.length - 1; i >= 0; i--) {
-  		if (this.characters[i].id == id) this.characters.splice(i, 1);
-  	}
-  }
+	async delete(id: number) {
+		return this.characterModel.findById( id ).remove().exec();
+	}
 
-  update(car: Character): Character{
-  	for (var i = this.characters.length - 1; i >= 0; i--) {
-  		if (this.characters[i].id == car.id) {
-  			this.characters[i] = car;
-  			return this.characters[i];
-  		}
-  	}
-  	return null;
-  }
+	async update(updateCharacterDto: UpdateCharacterDto): Promise<Character> {
+		return this.characterModel.findOneAndUpdate({ _id: updateCharacterDto.id }, updateCharacterDto).exec();
+	}
 }
