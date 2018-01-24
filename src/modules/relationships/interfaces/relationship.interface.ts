@@ -1,4 +1,5 @@
-export interface Relationship {
-	id: number;
+import { Document } from 'mongoose';
+
+export interface Relationship extends Document {
 	readonly name: string;
 }

@@ -1,43 +1,32 @@
-import { Component } from '@nestjs/common';
+import { Component, Inject } from '@nestjs/common';
 import { Relationship } from './interfaces/relationship.interface';
 import { CreateRelationshipDto } from './dto/create-relationship.dto';
+import { UpdateRelationshipDto } from './dto/update-relationship.dto';
+import { Model } from 'mongoose';
+import Constants from '../constants';
 
 @Component()
 export class RelationshipsService {
-  private id: number = 1;
-  private readonly relationships: Relationship[] = [];
+	constructor( @Inject(Constants.RELATIONSHIPS_PROVIDE) private readonly relationshipModel: Model<Relationship>) { }
 
-  create(relationship: CreateRelationshipDto) {
-	  console.log(relationship);
-	  relationship.id = this.id;
-	  this.relationships.push(relationship);
-	  ++this.id;
-  }
+	async create(createRelationshipDto: CreateRelationshipDto): Promise<Relationship> {
+		const createdRelationship = new this.relationshipModel(createRelationshipDto);
+		return await createdRelationship.save();
+	}
 
-  findAll(): Relationship[] {
-    return this.relationships;
-  }
+	async findAll(): Promise<Relationship[]> {
+		return await this.relationshipModel.find().exec();
+	}
 
-  findById(id: number): Relationship {
-  	for (var i = this.relationships.length - 1; i >= 0; i--) {
-  		if (this.relationships[i].id == id) return this.relationships[i];
-  	}
-  	return null;
-  }
+	async findById(id: number): Promise<Relationship> {
+		return await this.relationshipModel.findById(id).exec();
+	}
 
-  delete(id: number) {
-  	for (var i = this.relationships.length - 1; i >= 0; i--) {
-  		if (this.relationships[i].id == id) this.relationships.splice(i, 1);
-  	}
-  }
+	async delete(id: number) {
+		return this.relationshipModel.findById(id).remove().exec();
+	}
 
-  update(relationship: Relationship): Relationship{
-  	for (var i = this.relationships.length - 1; i >= 0; i--) {
-  		if (this.relationships[i].id == relationship.id) {
-  			this.relationships[i] = relationship;
-  			return this.relationships[i];
-  		}
-  	}
-  	return null;
-  }
+	async update(updateRelationshipDto: UpdateRelationshipDto): Promise<Relationship> {
+		return this.relationshipModel.findOneAndUpdate({ _id: updateRelationshipDto.id }, updateRelationshipDto).exec();
+	}
 }
