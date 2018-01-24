@@ -1,6 +1,9 @@
-import { IsString } from 'class-validator';
+import { IsString, IsInt } from 'class-validator';
 
 export class CreateCharacterDto {
+	@IsInt()
+	public id: number;
+
 	@IsString()
   	readonly name: string;
 }

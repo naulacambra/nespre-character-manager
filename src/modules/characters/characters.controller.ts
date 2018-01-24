@@ -1,38 +1,38 @@
-import { Controller, Get, Post, Delete, Put, Body, Param} from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Body, Param, HttpStatus } from '@nestjs/common';
 import { CreateCharacterDto } from './dto/create-character.dto';
 import { UpdateCharacterDto } from './dto/update-character.dto';
-// import { CarsService } from './cars.service';
+import { CharactersService } from './characters.service';
 import { Character } from './interfaces/character.interface';
 
 @Controller('characters')
 export class CharactersController {
 
-	// constructor(private readonly carsService: CarsService) {}
+	constructor(private readonly charactersService: CharactersService) {}
 
-	// @Get()
-	// async findAll(): Promise<Car[]> {
-	//   return this.carsService.findAll();
-	// }
+	@Get('all')
+	async findAll(): Promise<Character[]> {
+		return this.charactersService.findAll();
+	}
 
-	// @Get(':id')
-	// async findById(@Param('id') id: number): Promise<Car> {
-	// 	console.log(id);
-	//   return this.carsService.findById(id);
-	// }
+	@Get(':id')
+	async findById(@Param('id') id: number): Promise<Character> {
+		console.log('find by id', id);
+		return this.charactersService.findById(id);
+	}
 
-	// @Post()
-	// async create(@Body() createCarDto: CreateCarDto) {
-	//   this.carsService.create(createCarDto);
-	// }
+	@Post()
+	async create(@Body() createCharacterDto: CreateCharacterDto) {
+		console.log('create character', createCharacterDto);
+		this.charactersService.create(createCharacterDto);
+	}
 
-	// @Delete(':id')
-	// async delete(@Param('id') id: number) {
-	//   this.carsService.delete(id);
-	// }
+	@Delete(':id')
+	async delete(@Param('id') id: number) {
+	  this.charactersService.delete(id);
+	}
 
-	// @Put()
-	// async update(@Body() updateCarDto: UpdateCarDto): Promise<Car> {
-	//   return this.carsService.update(updateCarDto);
-	// }
-
+	@Put()
+	async update(@Body() updateCharacterDto: UpdateCharacterDto): Promise<Character> {
+	  return this.charactersService.update(updateCharacterDto);
+	}
 }
