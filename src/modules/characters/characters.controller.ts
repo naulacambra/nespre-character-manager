@@ -9,7 +9,7 @@ export class CharactersController {
 
 	constructor(private readonly charactersService: CharactersService) {}
 
-	@Get('all')
+	@Get()
 	async findAll(): Promise<Character[]> {
 		return this.charactersService.findAll();
 	}

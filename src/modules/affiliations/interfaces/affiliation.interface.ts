@@ -1,4 +1,4 @@
-export interface Character {
+export interface Affiliation {
 	id: number;
 	readonly name: string;
 }
