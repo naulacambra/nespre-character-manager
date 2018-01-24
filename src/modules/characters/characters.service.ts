@@ -3,10 +3,11 @@ import { Character } from './interfaces/character.interface';
 import { CreateCharacterDto } from './dto/create-character.dto';
 import { UpdateCharacterDto } from './dto/update-character.dto';
 import { Model } from 'mongoose';
+import Constants from '../constants';
 
 @Component()
 export class CharactersService {
-	constructor(@Inject('CharacterModelToken') private readonly characterModel: Model<Character> ) {}
+	constructor(@Inject(Constants.CHARACTERS_PROVIDE) private readonly characterModel: Model<Character> ) {}
 
 	async create(createCharacterDto: CreateCharacterDto): Promise<Character> {
 		const createdCharacter = new this.characterModel(createCharacterDto);

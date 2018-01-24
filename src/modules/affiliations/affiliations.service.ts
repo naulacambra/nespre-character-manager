@@ -1,43 +1,32 @@
-import { Component } from '@nestjs/common';
+import { Component, Inject } from '@nestjs/common';
 import { Affiliation } from './interfaces/affiliation.interface';
 import { CreateAffiliationDto } from './dto/create-affiliation.dto';
+import { UpdateAffiliationDto } from './dto/update-affiliation.dto';
+import { Model } from 'mongoose';
+import Constants from '../constants';
 
 @Component()
 export class AffiliationsService {
-  private id: number = 1;
-  private readonly affiliations: Affiliation[] = [];
+	constructor( @Inject(Constants.AFFILIATIONS_PROVIDE) private readonly affiliationModel: Model<Affiliation>) { }
 
-  create(affiliation: CreateAffiliationDto) {
-	  console.log(affiliation);
-	  affiliation.id = this.id;
-	  this.affiliations.push(affiliation);
-	  ++this.id;
-  }
+	async create(createAffiliationDto: CreateAffiliationDto): Promise<Affiliation> {
+		const createdAffiliation = new this.affiliationModel(createAffiliationDto);
+		return await createdAffiliation.save();
+	}
 
-  findAll(): Affiliation[] {
-    return this.affiliations;
-  }
+	async findAll(): Promise<Affiliation[]> {
+		return await this.affiliationModel.find().exec();
+	}
 
-  findById(id: number): Affiliation {
-  	for (var i = this.affiliations.length - 1; i >= 0; i--) {
-  		if (this.affiliations[i].id == id) return this.affiliations[i];
-  	}
-  	return null;
-  }
+	async findById(id: number): Promise<Affiliation> {
+		return await this.affiliationModel.findById( id ).exec();
+	}
 
-  delete(id: number) {
-  	for (var i = this.affiliations.length - 1; i >= 0; i--) {
-  		if (this.affiliations[i].id == id) this.affiliations.splice(i, 1);
-  	}
-  }
+	async delete(id: number) {
+		return this.affiliationModel.findById( id ).remove().exec();
+	}
 
-  update(car: Affiliation): Affiliation{
-  	for (var i = this.affiliations.length - 1; i >= 0; i--) {
-  		if (this.affiliations[i].id == car.id) {
-  			this.affiliations[i] = car;
-  			return this.affiliations[i];
-  		}
-  	}
-  	return null;
-  }
+	async update(updateAffiliationDto: UpdateAffiliationDto): Promise<Affiliation> {
+		return this.affiliationModel.findOneAndUpdate({ _id: updateAffiliationDto.id }, updateAffiliationDto).exec();
+	}
 }

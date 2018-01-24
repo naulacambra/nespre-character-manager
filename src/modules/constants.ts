@@ -4,4 +4,5 @@ export default class Constants {
 	public static DB_CONNECTION_TOKEN = 'DbConnectionToken';
 
 	public static CHARACTERS_PROVIDE = 'CharacterModelToken';
+	public static AFFILIATIONS_PROVIDE = 'AffiliationModelToken';
 };
