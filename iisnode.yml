@@ -1,6 +1,7 @@
 # For documentation see https://github.com/tjanczuk/iisnode/blob/master/src/samples/configuration/iisnode.yml
 nodeProcessCommandLine: "D:\Program Files (x86)\nodejs\8.9.3\node.exe"
 loggingEnabled: true
+logDirectory: iisnode
 debuggingEnabled: true
 devErrorsEnabled: true
 node_env: production
