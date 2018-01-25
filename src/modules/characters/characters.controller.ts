@@ -7,7 +7,7 @@ import { Character } from './interfaces/character.interface';
 @Controller('characters')
 export class CharactersController {
 
-	constructor(private readonly charactersService: CharactersService) {}
+	constructor(private readonly charactersService: CharactersService) { }
 
 	@Get()
 	async findAll(): Promise<Character[]> {
@@ -15,24 +15,25 @@ export class CharactersController {
 	}
 
 	@Get(':id')
-	async findById(@Param('id') id: number): Promise<Character> {
+	async findById( @Param('id') id: number): Promise<Character> {
 		console.log('find by id', id);
 		return this.charactersService.findById(id);
 	}
 
 	@Post()
-	async create(@Body() createCharacterDto: CreateCharacterDto) {
+	async create( @Body() createCharacterDto: CreateCharacterDto) {
 		console.log('create character', createCharacterDto);
 		this.charactersService.create(createCharacterDto);
 	}
 
 	@Delete(':id')
-	async delete(@Param('id') id: number) {
-	  this.charactersService.delete(id);
+	async delete( @Param('id') id: number) {
+		this.charactersService.delete(id);
 	}
 
 	@Put()
-	async update(@Body() updateCharacterDto: UpdateCharacterDto): Promise<Character> {
-	  return this.charactersService.update(updateCharacterDto);
+	async update( @Body() updateCharacterDto: UpdateCharacterDto): Promise<Character> {
+		console.log('update character', updateCharacterDto);
+		return this.charactersService.update(updateCharacterDto);
 	}
 }
