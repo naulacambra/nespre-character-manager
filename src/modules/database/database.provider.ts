@@ -6,7 +6,13 @@ export const databaseProviders = [
     provide: Constants.DB_CONNECTION_TOKEN,
     useFactory: async () => {
       (mongoose as any).Promise = global.Promise;
-      return await mongoose.createConnection(`mongodb://localhost/${Constants.DB_NAME}`);
+      mongoose.set('debug', true);
+      return await mongoose.createConnection(Constants.DB_CONNECTION_STRING, {
+        auth: {
+          user: Constants.DB_USER,
+          password: Constants.DB_PWD
+        }
+      });
     },
   },
 ];
