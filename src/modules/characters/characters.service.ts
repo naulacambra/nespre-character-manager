@@ -15,7 +15,10 @@ export class CharactersService {
 	}
 
 	async findAll(): Promise<Character[]> {
-		return await this.characterModel.find().exec();
+		return await this.characterModel
+			.find()
+			.populate('affiliations')
+			.exec();
 	}
 
 	async findById(id: number): Promise<Character> {
