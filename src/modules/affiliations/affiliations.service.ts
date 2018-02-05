@@ -15,7 +15,10 @@ export class AffiliationsService {
 	}
 
 	async findAll(): Promise<Affiliation[]> {
-		return await this.affiliationModel.find().exec();
+		return await this.affiliationModel
+			.find()
+			.populate('members')
+			.exec();
 	}
 
 	async findById(id: number): Promise<Affiliation> {

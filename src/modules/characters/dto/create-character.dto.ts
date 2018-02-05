@@ -5,5 +5,7 @@ export class CreateCharacterDto {
 	public id: number;
 
 	@IsString()
-  	readonly name: string;
+	readonly name: string;
+
+	readonly affiliations: string[];
 }
