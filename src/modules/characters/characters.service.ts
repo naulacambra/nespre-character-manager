@@ -19,19 +19,18 @@ export class CharactersService {
 	async findAll(): Promise<Character[]> {
 		return await this.characterModel
 			.find()
-			.populate({
-				path: 'affiliations',
-			})
+			.populate('affiliations', 'name')
+			.populate('relationships.character', 'name')
+			.populate('relationships.type', 'name')
 			.exec();
 	}
 
 	async findById(id: number): Promise<Character> {
 		return await this.characterModel
 			.findById(id)
-			.populate({
-				path: 'affiliations',
-				populate: { path: 'members' }
-			})
+			.populate('affiliations', 'name')
+			.populate('relationships.character', 'name')
+			.populate('relationships.type', 'name')
 			.exec();
 	}
 

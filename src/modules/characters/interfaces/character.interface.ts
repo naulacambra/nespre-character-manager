@@ -5,4 +5,5 @@ export interface Character extends Document {
 	readonly name: string;
 	readonly img: string;
 	readonly affiliations: ObjectId[];
+	readonly relationships: any[];
 }

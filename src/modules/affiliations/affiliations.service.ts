@@ -17,16 +17,23 @@ export class AffiliationsService {
 	async findAll(): Promise<Affiliation[]> {
 		return await this.affiliationModel
 			.find()
-			.populate('members')
+			.populate('members', 'name')
+			.populate('relationships.affiliation', 'name')
+			.populate('relationships.type', 'name')
 			.exec();
 	}
 
 	async findById(id: number): Promise<Affiliation> {
-		return await this.affiliationModel.findById( id ).exec();
+		return await this.affiliationModel
+			.findById(id)
+			.populate('members', 'name')
+			.populate('relationships.affiliation', 'name')
+			.populate('relationships.type', 'name')
+			.exec();
 	}
 
 	async delete(id: number) {
-		return this.affiliationModel.findById( id ).remove().exec();
+		return this.affiliationModel.findById(id).remove().exec();
 	}
 
 	async update(updateAffiliationDto: UpdateAffiliationDto): Promise<Affiliation> {
